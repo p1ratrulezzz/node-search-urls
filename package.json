@@ -1,6 +1,6 @@
 {
   "name": "search-urls",
-  "version": "0.0.0",
+  "version": "0.0.1-0",
   "description": "Searches for URLs in text and return found URLs as an array. Also can check if domain name is correct or not according to TLD list database. Useful to find URLs in text. Can find url using http:// or without. Example: \"Some text and then goes link example.com\". Using this module will give: [\"example.com\"]. ",
   "main": "src/main.js",
   "scripts": {

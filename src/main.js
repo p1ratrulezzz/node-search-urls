@@ -12,7 +12,7 @@
  */
 
 function trimDots(text) {
-  while (text.length > 0 && '.,:;!?'.split('').indexOf(text[0]) !== -1) {
+  while (text.length > 0 && '.,:;!?'.split('').indexOf(text[text.length-1]) !== -1) {
     text = text.substr(0, text.length - 1)
   }
   

@@ -11,6 +11,14 @@
  * @protected
  */
 
+function trimDots(text) {
+  while (text.length > 0 && '.,:;!?'.split('').indexOf(text[0]) !== -1) {
+    text = text.substr(0, text.length - 1)
+  }
+  
+  return text;
+}
+
 /**
  *
  * @param text Text to search for URLs in
@@ -34,10 +42,10 @@ function findUrls(text, options = {}) {
   }
 
   // @link http://stackoverflow.com/a/38477788/5242972
-  // @link https://regex101.com/r/vX8vH8/16
+  // @link https://regex101.com/r/vX8vH8/21
   // @link http://kourge.net/projects/regexp-unicode-block
   // @link http://www.unicode.org/charts/
-  let expression = /(?:([a-z]{3,16})\:\/\/)?([\w\.\-\u00BF-\u1FFF\u2C00-\uD7FF]+(?=\.)\.(?:[^\s\/\.]{2,32}))(\/[^\s]+)?/ig;
+  let expression = /(?:([a-z]{3,16})\:\/\/)?(([\u2100-\u214Fa-z0-9\.\-\u00BF-\u1FFF\u2C00-\uD7FF]+(?=\.)\.(?:[^\.\s\/\(\)\!\?\.\,\:\;\?\&]{2,32}))(\/[^\s]+)?)(\?[^\s\?]+)?/gi;
 
   let m;
   let matches = {
@@ -53,8 +61,8 @@ function findUrls(text, options = {}) {
 
     // Check domain according to tld list
     // @todo: Handle punycode domains
-    let topLevelDomain = m[2].split('.').pop();
-    let domainToSave = options.domainOnly ? m[2] : m[0];
+    let topLevelDomain = trimDots(m[3]).split('.').pop();
+    let domainToSave = trimDots(options.domainOnly ? m[2] : m[0]);
     if (options.checkDomain !== false && tld[topLevelDomain] !== undefined) {
       matches.correct.push(domainToSave);
     }

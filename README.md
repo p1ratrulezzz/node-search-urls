@@ -1,6 +1,5 @@
 # Search Urls module for node
 
-
 ## Description
 
 Searches for URLs in text and return found URLs as an array. 
@@ -11,7 +10,10 @@ Using this module will give: ["example.com"].
 
 Simple utility to find URLs in text.
 
-## Examples
+# Install
+    npm install search-urls
+    
+## Usage examples
 
 ```javascript
 const searchUrls = require('search-urls').searchUrls;
